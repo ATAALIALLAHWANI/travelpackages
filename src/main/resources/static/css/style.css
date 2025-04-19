@@ -1,0 +1,64 @@
+:root {
+    --primary-color: #2A9D8F;
+    --secondary-color: #305570;
+    --accent-color: #E9C46A;
+    --text-dark: #2B2D42;
+    --text-light: #EDF2F4;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    min-height: 100vh;
+}
+
+.navbar {
+    background: var(--secondary-color);
+    box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+}
+
+.logo {
+    width: 180px;
+    transition: transform 0.3s ease;
+}
+
+.logo:hover {
+    transform: scale(1.05);
+}
+
+.page-title {
+    font-weight: 600;
+}
+
+.form-section {
+    margin-top: 80px;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.package-card {
+    border: none;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease;
+}
+
+.package-card:hover {
+    transform: translateY(-5px);
+}
+
+.card-title, .card-text {
+    color: var(--text-dark);
+}
+
+.search-btn {
+    background-color: var(--primary-color);
+    border: none;
+}
+
+.search-btn:hover {
+    background-color: #21867a;
+}

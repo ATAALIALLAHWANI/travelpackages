@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title> Travel Packages </title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark py-3">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <img src="/images/logo.png" alt="Wanderlust Logo" class="logo">
+            </a>
+            <h2 class="page-title m-0 text-white">Discover Your Next Adventure</h2>
+        </div>
+    </nav>
+
+    <div class="container form-section">
+        <form th:action="@{/search}" method="post" class="mb-5">
+            <div class="row g-3 align-items-end">
+                <div class="col-md-5">
+                    <label class="form-label">Origin City</label>
+                    <input type="text" name="originCity" class="form-control" placeholder="e.g. Amman" required>
+                </div>
+                <div class="col-md-5">
+                    <label class="form-label">Destination City</label>
+                    <input type="text" name="destinationCity" class="form-control" placeholder="e.g. Punta Cana" required>
+                </div>
+                <div class="col-md-2">
+                    <button class="btn btn-primary w-100 search-btn">
+                        <i class="bi bi-search"></i> Search
+                    </button>
+                </div>
+            </div>
+        </form>
+
+        <div th:if="${not #lists.isEmpty(packages)}">
+            <h4 class="mb-4">Available Packages:</h4>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4" th:each="pkg : ${packages}">
+                    <div class="card package-card">
+                        <div class="card-body">
+                            <h5 class="card-title" th:text="${pkg.hotelInfo.hotelName}">Hotel Name</h5>
+                            <p class="card-text">
+                                <i class="bi bi-geo-alt-fill text-danger"></i>
+                                From: <strong th:text="${pkg.origin.city}">Origin</strong><br>
+                                <i class="bi bi-geo-fill text-success"></i>
+                                To: <strong th:text="${pkg.destination.city}">Destination</strong><br>
+        
+                                <i class="bi bi-calendar-event text-primary"></i>
+                                Start Date: <strong th:text="${pkg.travelStartDate}">Start Date</strong><br>
+                                <i class="bi bi-calendar-check text-primary"></i>
+                                End Date: <strong th:text="${pkg.travelEndDate}">End Date</strong><br>
+        
+                                <i class="bi bi-cash-coin text-warning"></i>
+                                Package Price: <strong th:text="${pkg.packagePricingInfo.formattedTotalPriceValue}">$0.00</strong><br>
+        
+                                <i class="bi bi-airplane text-info"></i>
+                                Flight Carrier: <strong th:text="${pkg.flightInfo.flightDealCarrierName}">Carrier Name</strong><br>
+                                <i class="bi bi-currency-dollar text-success"></i>
+                                Flight Price: <strong th:text="${pkg.flightPricingInfo.flightTotalPrice}">$0.00</strong><br>
+                                <i class="bi bi-globe text-info"></i>
+                                Currency: <strong th:text="${pkg.flightPricingInfo.currencyCode}">USD</strong>
+                            </p>
+                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+
+        <div th:if="${packages != null and packages.isEmpty()}">
+            <div class="alert alert-warning mt-4">
+                <i class="bi bi-exclamation-triangle"></i> No packages found for your search.
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
